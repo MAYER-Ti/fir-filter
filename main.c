@@ -51,7 +51,7 @@ int main()
     }
     // Create memory buffer on the device for the vector
 
-    cl_mem Input_clmem = clCreateBuffer(context, CL_MEM_READ_ONLY, ((INPUT_SIZE) * sizeof(short)*2), NULL, &status);
+    cl_mem Input_clmem = clCreateBuffer(context, CL_MEM_READ_ONLY, (INPUT_SIZE) * sizeof(short), NULL, &status);
     clCreateBuffer(context, CL_MEM_READ_ONLY, (INPUT_SIZE)*sizeof(short), NULL, &status);
     error(status, "Failed to create memory for input");
     cl_mem Output_clmem = clCreateBuffer(context, CL_MEM_WRITE_ONLY, (INPUT_SIZE) * sizeof(float), NULL, &status);
@@ -90,7 +90,7 @@ int main()
       glsize = 1024;
 
 
-     size_t global_work_size[3] = {(glsize*2), 1, 1};
+    size_t global_work_size[3] = {glsize, 1, 1};
     status = clEnqueueNDRangeKernel(queue, kernel, 1, NULL, global_work_size, local_work_size, 0, NULL, &kernel_event);
     error(status, "Failed to launch kernel");
     status = clFinish(queue);
